@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="name-of-your-coding-standard">
+    <description>Description of your coding standard</description>
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>tests/_data/*</exclude-pattern>
+    <exclude-pattern>tests/_log/*</exclude-pattern>
+    <exclude-pattern>tests/_bootstrap.php</exclude-pattern>
+    <exclude-pattern>tests/*.yml</exclude-pattern>
+    <!--<rule ref="Generic.PHP.DisallowShortOpenTag"/>-->
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Generic.Classes.DuplicateClassName" />
+    <rule ref="Generic.PHP.DeprecatedFunctions" />
+    <rule ref="PEAR.NamingConventions.ValidClassName" />
+    <!--<rule ref="PEAR.Commenting.FunctionComment" />-->
+    <!--<rule ref="Generic.Commenting.DocComment" />-->
+    <rule ref="Generic.Commenting.Todo.CommentFound">
+        <message>Please review this TODO comment: %s</message>
+        <severity>3</severity>
+    </rule>
+
+</ruleset>
