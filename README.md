@@ -1,35 +1,36 @@
 Automatization project via jenkins and grunt
 
 Requirements:
+-------------
 
 Node - http://nodejs.org/
 
 All php tools and jenkins plugin from http://jenkins-php.org/installation.html
 
 Installattion:
------------
+-------------
 
-npm install
+	npm install
 
------------ 
- install node_modules for grunt
 
-------------------------------
+install node_modules for grunt
 
-php codeception.phar bootstrap
 
-------------------------------
+
+	php codeception.phar bootstrap
+
  
- install all tests
+install all tests
+
 
 Add into main codeception.yml coverage settings 
 
-coverage:
-    enabled: true
-    include:
-        - app/*
-    exclude:
-        - app/cache/*
+	coverage:
+	    enabled: true
+	    include:
+		- app/*
+	    exclude:
+		- app/cache/*
 
 
 Change in acceptance.suite.yml (in tests directory) urk of your project for example:
@@ -42,6 +43,7 @@ Change in acceptance.suite.yml (in tests directory) urk of your project for exam
 Change build.xml,phpcs.xml,phpmd.xml for your project structure
 
 Usage:
+--------
 
 grunt test - auto-run unit,functional and acceptance tests
 
