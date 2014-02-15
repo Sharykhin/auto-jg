@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <!-- directory, where documentation will be generated -->
+    <parser>
+        <target>build/docs/phpdoc</target>
+    </parser>
+    <transformer>
+        <target>build/docs/phpdoc</target>
+    </transformer>
+    <!-- use template -->
+    <transformations>
+        <template name="responsive-twig"></template>
+    </transformations>
+    <!-- include or exclude files and directories -->
+    <files>
+        <directory>lib</directory>
+        <ignore>lib/classes/*</ignore>
+        <ignore>lib/ExtConstructor/*</ignore>
+        <ignore>lib/Smarty/*</ignore>
+        <ignore>lib/Unit/*</ignore>
+        <ignore>lib/Xml2Selenium/*</ignore>
+        <ignore>lib/Zend/*</ignore>
+        <ignore>lib/Image/*</ignore>
+        <ignore>lib/sms/*</ignore>
+        <ignore>lib/Image.php</ignore>
+        <ignore>lib/img_lib.php</ignore>
+        <ignore>lib/mysql.class.php</ignore>
+        <ignore>lib/mysql.functions.php</ignore>
+        <ignore>lib/RegistController.php</ignore>
+        <ignore>lib/resize.php</ignore>
+        <ignore>lib/server.class.php</ignore>
+        <ignore>lib/strings.class.php</ignore>
+    </files>
+    <!--<files>-->
+    <!--<file>test.php</file>-->
+    <!--<file>bin/*</file>-->
+    <!--<directory>src</directory>-->
+    <!--<directory>tes??</directory>-->
+    <!--<ignore>test/*</ignore>-->
+    <!--</files>-->
+</phpdoc>

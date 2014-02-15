@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="name-of-your-coding-standard">
     <description>Description of your coding standard</description>
+    <!-- exclude patterns -->
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>tests/_data/*</exclude-pattern>
     <exclude-pattern>tests/_log/*</exclude-pattern>

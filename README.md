@@ -40,7 +40,25 @@ Change in acceptance.suite.yml (in tests directory) urk of your project for exam
             url: 'http://test-silex.loc/'
 
 
-Change build.xml,phpcs.xml,phpmd.xml for your project structure
+Change build.xml,phpcs.xml,phpmd.xml for your project structure.
+Make codecept.phar global (move it to /urs/local/bin/codeception)
+
+    mv codecept.phar /usr/local/bin/codeception
+
+Make phpDocumentator global
+
+    mv phpDocumentor.phar /usr/bin/phpdoc
+
+If you don't want to make its global, so, please, rename all codeception into php codecept.phar
+and phpdoc into php phpDocumentor.phar
+
+For Windows:
+-----------
+
+If you use windows, rename build.windows.xml into build.xml
+
+and rename Gruntfile.windows.js into Gruntfile.js
+
 
 Usage:
 --------

@@ -3,62 +3,71 @@
 <project name="Test" default="build" basedir=".">
     <property name="output" location="${basedir}/build/"/>
 
-    <target name="build" depends="init, unit,functional,acceptance,phpcs,phpmd,phpcpd,phploc,pdepend,phpdoc"></target>
+    <target name="build" depends="init, unit, reports, phpcs, phpmd, phpcpd, phploc, pdepend, phpdoc, jsdoc"></target>
     <!--<target name="build" depends="init, test, phpdoc, phpcb"></target>-->
     <!--<target name="build" depends="init, test"></target>-->
 
     <target name="init">
         <mkdir dir="${output}"/>
-        <mkdir dir="${output}/phpcs/"/>
         <mkdir dir="${output}/pdepend/"/>
         <mkdir dir="${output}/CodeCoverage/"/>
         <mkdir dir="${output}/phpdoc/"/>
         <mkdir dir="${output}/phpdoc/api"/>
         <mkdir dir="${output}/src/"/>
         <mkdir dir="${output}/logs/"/>
-        <mkdir dir="${output}/code-browser/"/>
     </target>
-
+    <!-- standard phpunit -->
     <target name="test">
         <exec executable="phpunit" failonerror="true">
             <arg line="--coverage-clover ${output}/CodeCoverage/clover.xml
 				--coverage-html ${output}/CodeCoverage/"/>
         </exec>
     </target>
-
+    <!-- generate coverage report in tests/_log/coverage/index.html -->
     <target name="unit">
         <exec dir="${basedir}" executable="cmd" failonerror="false">
             <arg line="/c php codecept.phar run unit --coverage --xml --html" />
         </exec>
     </target>
 
-    <target name="functional">
+    <!-- generate all reports (unit,functional,acceptance in tests/_log/report.html) -->
+    <target name="reports">
         <exec dir="${basedir}" executable="cmd" failonerror="false">
-            <arg line="/c php codecept.phar run functional --steps" />
+            <arg line="/c php codecept.phar run --steps --xml --html" />
         </exec>
     </target>
 
-    <target name="acceptance">
-        <exec dir="${basedir}" executable="cmd" failonerror="false">
-            <arg line="/c php codecept.phar run acceptance --steps" />
+    <!-- Standartization of code. File configuration is phpcs.xml -->
+    <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer">
+        <exec executable="cmd" dir="${basedir}">
+            <arg line="/c phpcs --standard=${basedir}/phpcs.xml --report=checkstyle --report-file=${output}/logs/checkstyle.xml
+                ${basedir}/src" />
         </exec>
     </target>
 
+    <!-- messdetector show mistakes,errors and warning in code.File configuration is phpmd.xml -->
     <target name="phpmd" description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
-        <exec executable="phpmd">
-            <arg line="
+        <exec executable="cmd">
+            <arg line="/c phpmd
             ${basedir}/src xml  ${basedir}/phpmd.xml  --reportfile ${output}/logs/messdetector.xml
             " />
         </exec>
     </target>
 
+    <!-- show copy paste cases. -->
     <target name="phpcpd" description="Find duplicate code using PHPCPD">
         <exec executable="cmd" dir="${basedir}">
             <arg line="/c phpcpd
-
                  --log-pmd ${output}/phpcpd.xml
                  ${basedir}/src
             " />
+        </exec>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <exec executable="cmd">
+            <arg line="/c phploc --log-csv ${output}/logs/phploc.csv ${basedir}/src" />
+
         </exec>
     </target>
 
@@ -75,39 +84,23 @@
         </exec>
     </target>
 
+    <!-- generate phpdoc. File configuration is phpdoc.xml -->
     <target name="phpdoc" description="Generate API documentation using phpDox">
         <exec executable="cmd" dir="${basedir}" failonerror="false">
-            <arg line="/c phpdoc
-                -t ${output}/phpdoc/api
-                -d ${basedir}/src
-            "/>
+            <arg line="/c php phpDocumentor.phar  "/>
         </exec>
     </target>
 
-    <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer">
-        <exec executable="cmd" dir="${basedir}">
-            <arg line="/c phpcs --standard=${basedir}/phpcs.xml --report=checkstyle --report-file=${output}/logs/checkstyle.xml
-                ${basedir}/src" />
+
+
+    <!-- generate API Javascript Documentation in build/docs/jsdoc -->
+    <target name="jsdoc" description="Generate API JS documentation">
+        <exec dir="${basedir}/" executable="cmd" failonerror="false">
+            <arg value="/c .\node_modules\.bin\jsdoc
+                ${basedir}/admin/templates/default/data/js/checkall.js
+                ${basedir}/admin/templates/default/data/js/backend.js
+                  -d ${output}/docs/jsdoc"/>
         </exec>
-    </target>
-
-    <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
-        <exec executable="phpcb">
-            <arg value="--log" />
-            <arg path="${output}/logs" />
-            <arg value="--source" />
-            <arg path="${output}/src" />
-            <arg value="--output" />
-            <arg path="${output}/code-browser" />
-        </exec>
-    </target>
-
-    <target name="phploc" description="Measure project size using PHPLOC">
-        <exec executable="cmd">
-            <arg line="/c phploc --log-csv ${output}/logs/phploc.csv ${basedir}/src" />
-
-        </exec>
-
     </target>
 
 </project>

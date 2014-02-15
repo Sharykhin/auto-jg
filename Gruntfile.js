@@ -34,14 +34,23 @@ module.exports = function(grunt) {
                 command: 'codeception run --steps'
              },
             phpdoc:{
-                command:'phpdoc  -t build/phpdoc/api  -d ./src'
+                command:'phpdoc'
 
             },
             coverage:{
                 command:'codeception run unit --coverage --xml --html'
             },
+            reports:{
+                command:'codeception run --steps --xml --html'
+            },
             checkstyle:{
                 command:'phpcs --standard=phpcs.xml ./src'
+            },
+            /* If you use window, generate jsdoc via this command
+             * @deprecated
+             */
+            jsdoc:{
+                command:'\.\\node_modules\\.bin\\jsdoc  admin/templates/default/data/js/checkall.js admin/templates/default/data/js/backend.js -d build/docs/jsdoc'
             }
 
         },
@@ -57,9 +66,16 @@ module.exports = function(grunt) {
                 jsdoc:'./node_modules/.bin/jsdoc',
                 src: ['src/**/*.js'],
                 options: {
-                    destination: 'build/jsdoc'
+                    destination: 'build/docs/jsdoc'
                 }
 
+            },
+            windist:{
+                jsdoc:'\.\\node_modules\\.bin\\jsdoc',
+                src: ['src/**/*.js'],
+                options: {
+                    destination: 'build/docs/jsdoc'
+                }
             }
 
         }
@@ -71,8 +87,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-jsdoc');
-
+    //check standard of code and some errors
     grunt.registerTask('checkstyle',['jshint','exec:checkstyle']);
+    //real-time testing
     grunt.registerTask('test',['watch']);
-    grunt.registerTask('doc',['jsdoc:dist','exec:phpdoc','exec:coverage']);
+    //generate api php and api js
+    grunt.registerTask('doc',['jsdoc:dist','exec:phpdoc']);
+    //generate all reports
+    grunt.registerTask('reports',['exec:phpdoc','jsdoc:dist','exec:coverage','exec:reports']);
 };
