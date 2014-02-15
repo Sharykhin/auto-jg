@@ -69,5 +69,7 @@ grunt doc - generate jsdoc and phpdoc in build directory
 
 grunt checkstyle - check jscode via jshint and php code via phpcs
 
+grunt reports - generate all reports (unit,acceptance,functional,js doc and php doc)
+
 
 
