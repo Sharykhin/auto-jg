@@ -1,3 +1,4 @@
+#!/bin/bash
 echo '<?xml version="1.0" encoding="UTF-8"?>' > phpcs.xml
 echo '  <ruleset name="name-of-your-coding-standard">' >> phpcs.xml
 echo '      <description>Description of your coding standard</description>' >> phpcs.xml
