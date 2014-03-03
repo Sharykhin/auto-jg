@@ -9,6 +9,9 @@ All php tools and jenkins plugin from http://jenkins-php.org/installation.html
 
 Installattion:
 -------------
+    init.sh
+
+It creates all neccessary files, such as a phpdoc.xml, the package.json etc.
 
 	npm install
 
@@ -21,6 +24,26 @@ install node_modules for grunt
 
  
 install all tests
+
+
+Additional Installation:
+-----------------------
+
+phpcs
+http://pear.php.net/package/PHP_CodeSniffer/
+
+phploc
+https://github.com/sebastianbergmann/phploc
+
+pdepend
+http://pdepend.org/
+
+phpmd
+http://phpmd.org/
+
+phpcpd
+https://github.com/sebastianbergmann/phpcpd
+
 
 
 Add into main codeception.yml coverage settings 
