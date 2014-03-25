@@ -69,15 +69,15 @@ module.exports = function(grunt) {
                     destination: 'build/docs/jsdoc'
                 }
 
-            },
-            windist:{
-                jsdoc:'\.\\node_modules\\.bin\\jsdoc',
-                src: ['src/**/*.js'],
-                options: {
-                    destination: 'build/docs/jsdoc'
-                }
             }
-
+		},
+		shell: {                             
+            jsdoc: {                        
+                options: {                       
+                    stdout: true
+                },
+                command: 'grunt jsdoc:dist'
+            }
         }
 
 
@@ -87,12 +87,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-jsdoc');
+	grunt.loadNpmTasks('grunt-shell');
     //check standard of code and some errors
     grunt.registerTask('checkstyle',['jshint','exec:checkstyle']);
     //real-time testing
     grunt.registerTask('test',['watch']);
     //generate api php and api js
-    grunt.registerTask('doc',['jsdoc:dist','exec:phpdoc']);
+    grunt.registerTask('doc',['shell:jsdoc','exec:phpdoc']);
     //generate all reports
-    grunt.registerTask('reports',['exec:phpdoc','jsdoc:dist','exec:coverage','exec:reports']);
+    grunt.registerTask('reports',['exec:phpdoc','shell:jsdoc','exec:coverage','exec:reports']);
 };

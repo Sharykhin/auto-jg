@@ -80,7 +80,6 @@ For Windows:
 
 If you use windows, rename build.windows.xml into build.xml
 
-and rename Gruntfile.windows.js into Gruntfile.js
 
 
 Usage:

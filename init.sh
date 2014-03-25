@@ -129,7 +129,8 @@ echo '    "grunt-contrib-jshint": "~0.8.0",' >> package.json
 echo '    "grunt-contrib-watch": "~0.5.3",' >> package.json
 echo '    "grunt-exec": "~0.4.3",' >> package.json
 echo '    "grunt-jsdoc": "~0.5.1",' >> package.json
-echo '    "jsdoc": "~3.3.0-alpha4"' >> package.json
+echo '    "jsdoc": "~3.3.0-alpha4",' >> package.json
+echo '	  "grunt-shell": "~0.6.4"' >> package.json
 echo '  }' >> package.json
 echo '}' >> package.json
 
