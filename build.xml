@@ -10,30 +10,23 @@
     <target name="init">
         <mkdir dir="${output}"/>
         <mkdir dir="${output}/pdepend/"/>
-        <mkdir dir="${output}/CodeCoverage/"/>
         <mkdir dir="${output}/docs/"/>
         <mkdir dir="${output}/docs/jsdoc/"/>
         <mkdir dir="${output}/docs/phpdoc"/>
         <mkdir dir="${output}/src/"/>
         <mkdir dir="${output}/logs/"/>
     </target>
-    <!-- standard phpunit -->
-    <target name="test">
-        <exec executable="phpunit" failonerror="true">
-            <arg line="--coverage-clover ${output}/CodeCoverage/clover.xml
-				--coverage-html ${output}/CodeCoverage/"/>
-        </exec>
-    </target>
+
     <!-- generate coverage report in tests/_log/coverage/index.html -->
     <target name="unit">
-        <exec dir="${basedir}" executable="codeception" failonerror="false">
-            <arg line=" run unit --coverage --xml --html" />
+        <exec dir="${basedir}" executable="php" failonerror="false">
+            <arg line=" codecept.phar run unit --coverage --xml --html" />
         </exec>
     </target>
     <!-- generate all reports (unit,functional,acceptance in tests/_log/report.html) -->
     <target name="reports">
-        <exec dir="${basedir}" executable="codeception" failonerror="false">
-            <arg line=" run --steps --xml --html" />
+        <exec dir="${basedir}" executable="php" failonerror="false">
+            <arg line=" codecept.phar run --steps --xml --html" />
         </exec>
     </target>
 
@@ -86,11 +79,10 @@
 
     <!-- generate phpdoc. File configuration is phpdoc.xml -->
     <target name="phpdoc" description="Generate API documentation using phpDox">
-        <exec executable="phpdoc" dir="${basedir}" failonerror="false">
-
+        <exec executable="php" dir="${basedir}" failonerror="false">
+            <arg line=" phpDocumentor.phar" />
         </exec>
     </target>
-
 
 
 

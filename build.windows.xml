@@ -10,19 +10,12 @@
     <target name="init">
         <mkdir dir="${output}"/>
         <mkdir dir="${output}/pdepend/"/>
-        <mkdir dir="${output}/CodeCoverage/"/>
         <mkdir dir="${output}/phpdoc/"/>
         <mkdir dir="${output}/phpdoc/api"/>
         <mkdir dir="${output}/src/"/>
         <mkdir dir="${output}/logs/"/>
     </target>
-    <!-- standard phpunit -->
-    <target name="test">
-        <exec executable="phpunit" failonerror="true">
-            <arg line="--coverage-clover ${output}/CodeCoverage/clover.xml
-				--coverage-html ${output}/CodeCoverage/"/>
-        </exec>
-    </target>
+
     <!-- generate coverage report in tests/_log/coverage/index.html -->
     <target name="unit">
         <exec dir="${basedir}" executable="cmd" failonerror="false">

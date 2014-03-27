@@ -136,3 +136,99 @@ echo '}' >> package.json
 
 
 
+echo "module.exports = function(grunt) {" > Grungfile.js
+echo "    grunt.initConfig({" >> Grungfile.js
+echo "        pkg: grunt.file.readJSON('package.json')," >> Grungfile.js
+echo "" >> Grungfile.js
+echo "      jshint:{" >> Grungfile.js
+echo "            options:{" >> Grungfile.js
+echo "                curly:true," >> Grungfile.js
+echo "                eqeqeq:true," >> Grungfile.js
+echo "                immed:true," >> Grungfile.js
+echo "                latedef:true," >> Grungfile.js
+echo "                newcap:true," >> Grungfile.js
+echo "                noarg:true," >> Grungfile.js
+echo "                sub:true," >> Grungfile.js
+echo "                undef:true," >> Grungfile.js
+echo "                eqnull:true," >> Grungfile.js
+echo "                browser:true," >> Grungfile.js
+echo "                globals:{" >> Grungfile.js
+echo "                    jQuery:true," >> Grungfile.js
+echo "                    $:true," >> Grungfile.js
+echo "                    console:true" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "                }," >> Grungfile.js
+echo "                '-W117':false" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "            }," >> Grungfile.js
+echo "            files: {" >> Grungfile.js
+echo "                src: ['web/**/.js','src/**/*.js']" >> Grungfile.js
+echo "            }" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "        }," >> Grungfile.js
+echo "" >> Grungfile.js
+echo "        exec: {" >> Grungfile.js
+echo "            tests: {" >> Grungfile.js
+echo "                command: 'php codecept.phar --steps'" >> Grungfile.js
+echo "             }," >> Grungfile.js
+echo "            phpdoc:{" >> Grungfile.js
+echo "                command:'php phpDocumentor.phar'" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "            }," >> Grungfile.js
+echo "            coverage:{" >> Grungfile.js
+echo "                command:'php codecept.phar run unit --coverage --xml --html'" >> Grungfile.js
+echo "            }," >> Grungfile.js
+echo "            reports:{" >> Grungfile.js
+echo "                command:'php codecept.phar run --steps --xml --html'" >> Grungfile.js
+echo "            }," >> Grungfile.js
+echo "            checkstyle:{" >> Grungfile.js
+echo "                command:'phpcs --standard=phpcs.xml ./src'" >> Grungfile.js
+echo "            }     " >> Grungfile.js
+echo "" >> Grungfile.js
+echo "        }," >> Grungfile.js
+echo "        watch:{" >> Grungfile.js
+echo "            scripts:{" >> Grungfile.js
+echo "                files:['src/**/*.js','src/**/*.php','src/**/*.twig','tests/**/*Cept.php','tests/unit/**/*Test.php']," >> Grungfile.js
+echo "                tasks:['exec:tests']" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "            }" >> Grungfile.js
+echo "        }," >> Grungfile.js
+echo "        jsdoc : {" >> Grungfile.js
+echo "            dist : {" >> Grungfile.js
+echo "                jsdoc:'./node_modules/.bin/jsdoc'," >> Grungfile.js
+echo "                src: ['src/**/*.js']," >> Grungfile.js
+echo "                options: {" >> Grungfile.js
+echo "                    destination: 'build/docs/jsdoc'" >> Grungfile.js
+echo "                }" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "            }" >> Grungfile.js
+echo "		}," >> Grungfile.js
+echo "		shell: {       " >> Grungfile.js
+echo "            jsdoc: {    " >> Grungfile.js
+echo "                options: {      " >> Grungfile.js
+echo "                    stdout: true" >> Grungfile.js
+echo "                }," >> Grungfile.js
+echo "                command: 'grunt jsdoc:dist'" >> Grungfile.js
+echo "            }" >> Grungfile.js
+echo "        }" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "    });" >> Grungfile.js
+echo "" >> Grungfile.js
+echo "    grunt.loadNpmTasks('grunt-contrib-watch');" >> Grungfile.js
+echo "    grunt.loadNpmTasks('grunt-contrib-jshint');" >> Grungfile.js
+echo "    grunt.loadNpmTasks('grunt-exec');" >> Grungfile.js
+echo "    grunt.loadNpmTasks('grunt-jsdoc');" >> Grungfile.js
+echo "	  grunt.loadNpmTasks('grunt-shell');" >> Grungfile.js
+echo "    //check standard of code and some errors" >> Grungfile.js
+echo "    grunt.registerTask('checkstyle',['jshint','exec:checkstyle']);" >> Grungfile.js
+echo "    //real-time testing" >> Grungfile.js
+echo "    grunt.registerTask('test',['watch']);" >> Grungfile.js
+echo "    //generate api php and api js" >> Grungfile.js
+echo "    grunt.registerTask('doc',['shell:jsdoc','exec:phpdoc']);" >> Grungfile.js
+echo "    //generate all reports" >> Grungfile.js
+echo "    grunt.registerTask('reports',['exec:phpdoc','shell:jsdoc','exec:coverage','exec:reports']);" >> Grungfile.js
+echo "};" >> Grungfile.js
+
+
+

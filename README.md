@@ -64,14 +64,16 @@ Change in acceptance.suite.yml (in tests directory) urk of your project for exam
 
 
 Change build.xml,phpcs.xml,phpmd.xml for your project structure.
-Make codecept.phar global (move it to /urs/local/bin/codeception)
+You can make codecept.phar global (move it to /urs/local/bin/codeception)
 
     mv codecept.phar /usr/local/bin/codeception
 
-Make phpDocumentator global
+You can make phpDocumentator global
 
     mv phpDocumentor.phar /usr/bin/phpdoc
 
+
+	
 If you don't want to make its global, so, please, rename all codeception into php codecept.phar
 and phpdoc into php phpDocumentor.phar
 
